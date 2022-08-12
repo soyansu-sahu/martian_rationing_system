@@ -1,0 +1,67 @@
+{% extends "ration/base.html" %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+
+<div class="row">
+  <div class="col-4">
+    <form method="post" novalidate>
+      <div class="container">
+        {% csrf_token %} {{ form|crispy }}
+        <input type="submit" class="btn btn-success" value="Submit" />
+      </div>
+    </form>
+  </div>
+  <div class="col-1">
+
+  </div>
+  <div class="col-7">
+    <table class="table table-hover">
+      <thead>
+        <tr class="table-danger">
+          <th scope="col">ID</th>
+          <th scope="col">packet_type</th>
+          <th scope="col">packet_content</th>
+          <th scope="col">calories</th>
+          <th scope="col">expiry_date</th>
+          <th scope="col">water_quantity_litres</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      {% for item in inventory %}
+      <tbody>
+        <tr>
+          <td>{{item.id}}</td>
+          <td>{{item.packet_type}}</td>
+          <td>{{item.packet_content}}</td>
+          <td>{{item.calories}}</td>
+          <td>{{item.expiry_date}}</td>
+          <td>{{item.water_quantity_litres}}</td>
+          <td scope="col"><button type="button" class="btn btn-danger"><a href="{% url  'delete_list' item.id %}">Del</a></button></td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+
+<script>
+  url = window.location.pathname
+  console.log(url)
+  if (url.includes('create')) {
+    $("#update_li").addClass("active");
+    $("#home_li").removeClass("active")
+
+  } else {
+    $("#home_li").addClass("active")
+    $("#update_li").removeClass("active")
+  }
+
+</script>
+
+{% endblock %}

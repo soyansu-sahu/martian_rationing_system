@@ -1,0 +1,129 @@
+{% extends "ration/base.html" %}
+
+
+{% block content %}
+
+<div class="container">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="table-danger">
+                <th scope="col">Schedule Date </th>
+                <th scope="col">Packet Id </th>
+                <th scope="col">PacketType</th>
+                <th scope="col">PacketContent</th>
+                <th scope="col">Calories</th>
+                <th scope="col">Expiry Date</th>
+                <th scope="col">Quantity in Litres</th>
+
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for day_inventory in inventory %}
+
+            <tr>
+                <td>{{day_inventory.DAY}}</td>
+
+
+                <td align="center" class="p-0">
+                    <!-- food -->
+                    {% for food in day_inventory.FOOD %}
+                    {{food.id}}
+                    <hr>
+                    {% endfor %}
+                    <!-- water -->
+                    {% for water in day_inventory.WATER %}
+                    {{water.id}}
+                    {% if not forloop.last %}
+                    <hr>
+                    {% endif %}
+                    {% endfor %}
+                </td>
+
+                <td align="center" class="p-0">
+                    {% for food in day_inventory.FOOD %}
+                    {{food.packet_type}}
+                    <hr>
+                    {% endfor %}
+                    <!-- water -->
+                    {% for water in day_inventory.WATER %}
+                    {{water.packet_type}}
+                    {% if not forloop.last %}
+                    <hr>
+                    {% endif %}
+                    {% endfor %}
+                </td>
+
+                <td align="center" class="p-0">
+                    {% for food in day_inventory.FOOD %}
+                    {{food.packet_content}}
+                    <hr>
+                    {% endfor %}
+                    <!-- water -->
+                    {% for water in day_inventory.WATER %}
+                    -
+                    {% if not forloop.last %}
+                    <hr>
+                    {% endif %}
+                    {% endfor %}
+                </td>
+
+                <td align="center" class="p-0">
+                    {% for food in day_inventory.FOOD %}
+                    {{food.calories}}
+                    <hr>
+                    {% endfor %}
+                    <!-- water -->
+                    {% for water in day_inventory.WATER %}
+                    -
+                    {% if not forloop.last %}
+                    <hr>
+                    {% endif %}
+                    {% endfor %}
+                </td>
+
+                <td align="center" class="p-0">
+                    {% for food in day_inventory.FOOD %}
+                    {{food.expiry_date}}
+                    <hr>
+                    {% endfor %}
+                    <!-- water -->
+                    {% for water in day_inventory.WATER %}
+                    -
+                    {% if not forloop.last %}
+                    <hr>
+                    {% endif %}
+                    {% endfor %}
+                </td>
+
+
+                <td align="center" class="p-0">
+                    {% for food in day_inventory.FOOD %}
+                    -
+                    <hr>
+                    {% endfor %}
+                    <!-- water -->
+                    {% for water in day_inventory.WATER %}
+                    {{water.water_quantity_litres}}
+                    {% if not forloop.last %}
+                    <hr>
+                    {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td style="color: rgb(172, 16, 156);" colspan="7">
+                    <b>Number of days you can survive with current inventory : {{inventory|length}}</b>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+{% endblock %}
